@@ -2,6 +2,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('account/', include('accounts.urls')),
+    path(
+        '',
+        include(
+            ('leaderboard.urls',
+            'leaderboard')
+
+        )
+    ),
     path('admin/', admin.site.urls),
 ]
