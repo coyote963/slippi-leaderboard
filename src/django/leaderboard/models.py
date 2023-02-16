@@ -31,3 +31,14 @@ class Account(models.Model):
         auto_now_add=True,
         blank=True
     )
+
+class AccountUpdate(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(
+        'When the update occurred',
+        auto_now_add=True,
+        blank=True
+    )
+    slippi_data = models.JSONField(
+        'Data returned by the slippi api'
+    )
