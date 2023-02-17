@@ -6,6 +6,5 @@ Create a leaderboard for your friends to compete for the highest slippi score
 
  - [x] Make a form for submitting Slippi Usernames
  - [ ] Create admin panel for managing users
-    
  - [ ] Display the leaderboard (by some TBD logic)
  - [ ] Dockerize & Deploy
