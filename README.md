@@ -1,4 +1,8 @@
-# Django commands
+# Slippi Leaderboard
+
+It is a leaderboard for displaying slippi rankings
+
+#### Django commands
 
 `python manage.py runserver`
 
