@@ -21,16 +21,10 @@ def account_request(request):
         'leaderboard/account.html',
         {'form': form})
 
-# GET /
-# def index(request):
-    
-#     return render(request, 'leaderboard/home.html')
 
-
-def index(request):
+def generate_rankings_table():
     accounts = Account.objects.filter(current_update__isnull=False)
     updates = Update.objects.filter(account__in=accounts).order_by('-id')
-    
     ranking_changes = updates.values('account').annotate(
         current_ranking=F('ranking'),
         last_ranking=F('account__previous_update__ranking')
@@ -50,13 +44,21 @@ def index(request):
         else:
             ranking_change = ranking_change[1] - ranking_change[0]
         account_rows.append(
-            (
-                account.slippi_tag,
-                account.display_name,
-                current_rating,
-                current_ranking,
-                ranking_change
-            )
+            {
+                'slippi_tag': account.slippi_tag,
+                'display_name': account.display_name,
+                'current_rating': current_rating,
+                'current_ranking': current_ranking,
+                'ranking_change': ranking_change
+            }
         )
-    account_rows.sort(key=lambda x: x[2], reverse=True)
+    return sorted(
+        account_rows,
+        key=lambda x: x['current_ranking'])
+F
+
+# GET /
+# def index(request):
+def index(request):
+    account_rows = generate_rankings_table()
     return render(request, 'leaderboard/leaderboard.html', { 'account_rows': account_rows })

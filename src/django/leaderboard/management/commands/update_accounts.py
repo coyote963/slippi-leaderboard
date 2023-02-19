@@ -70,7 +70,7 @@ class Command(BaseCommand):
                 })
             except Exception as err:
                 Command.clear_account_updates(account)
-                logging.error(print(Exception, err))
+                logging.error(err)
         Command.commit_updates(all_updates)
 
 
