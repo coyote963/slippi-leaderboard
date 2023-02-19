@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 ranking=True
             )
         else:
-            raise Exception("Invalid Slippi Response")
+            raise Exception(f"Invalid Slippi Response: {slippi_data}")
 
         
     def commit_updates(all_updates):
@@ -60,7 +60,7 @@ class Command(BaseCommand):
         account.save()
 
 
-    def update_accounts():
+    def run_update_accounts():
         all_updates = []
         for account in Account.objects.filter(approved=True):
             try:
@@ -75,4 +75,4 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        update_accounts()
+        run_update_accounts()

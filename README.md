@@ -4,7 +4,7 @@ It is a leaderboard for displaying slippi rankings
 
 #### Django commands
 
-`python manage.py runserver`
+`python manage.py runserver_plus`
 
 Run development server
 
