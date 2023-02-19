@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "slippi-leaderboard"
+version = "0.1.0"
+description = "Management and displaying slippi ranking"
+authors = ["C. Boyardee <coyoteandbird@gmail.com>"]
+license = "ISC"
+readme = "README.md"
+packages = [{include = "slippi_leaderboard"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.28.2"
+Django = "^4.1.7"
+responses = "0.22.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

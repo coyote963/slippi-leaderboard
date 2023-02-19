@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account Table</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+    }
+    table {
+      border-collapse: collapse;
+      color: red;
+      border: 2px solid red;
+      margin: 20px;
+    }
+    th {
+      font-weight: bold;
+      text-align: left;
+      border: 1px solid red;
+      padding: 10px;
+    }
+    td {
+      text-align: left;
+      border: 1px solid red;
+      padding: 10px;
+    }
+    a {
+      color: #ff7f7f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Slippi-Leaderboard!</h1>
+  <a href="{% url 'leaderboard:account_request' %}">Submit your Slippi Tag</a>
+  <a href="/admin/">Go To Admin</a>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Slippi Tag</th>
+        <th>Name</th>
+        <th>Current Rating</th>
+        <th>Ranking</th>
+        <th>Ranking Change Since Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for account_row in account_rows %}
+        <tr>
+          <td>{{ account_row.0 }}</td>
+          <td>{{ account_row.1 }}</td>
+          <td>{{ account_row.2 }}</td>
+          <td>{{ account_row.3 }}</td>
+          <td>{{ account_row.4|default_if_none:"N/A" }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

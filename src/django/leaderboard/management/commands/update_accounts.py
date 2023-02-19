@@ -13,7 +13,12 @@ class Command(BaseCommand):
         and 'user' in slippi_data['getConnectCode'] \
         and 'rankedNetplayProfile' in slippi_data['getConnectCode']['user']:
             ranked_profile = slippi_data['getConnectCode']['user']['rankedNetplayProfile']
-            if 'wins' in ranked_profile and 'losses' in ranked_profile and 'ratingOrdinal' in ranked_profile:
+            if 'wins' in ranked_profile \
+                and 'losses' in ranked_profile \
+                and 'ratingOrdinal' in ranked_profile \
+                and ranked_profile['wins'] is not None\
+                and ranked_profile['losses'] is not None\
+                and ranked_profile['ratingOrdinal'] is not None:
                 return ranked_profile
         return None 
 
@@ -31,7 +36,7 @@ class Command(BaseCommand):
                 ranking=True
             )
         else:
-            raise Exception("Data was improperly formatted")
+            raise Exception("Invalid Slippi Response")
 
         
     def commit_updates(all_updates):
@@ -55,7 +60,7 @@ class Command(BaseCommand):
         account.save()
 
 
-    def handle(self, *args, **options):
+    def update_accounts():
         all_updates = []
         for account in Account.objects.filter(approved=True):
             try:
@@ -64,6 +69,10 @@ class Command(BaseCommand):
                     'account': account
                 })
             except Exception as err:
-                clear_account_updates(account)
+                Command.clear_account_updates(account)
                 logging.error(print(Exception, err))
         Command.commit_updates(all_updates)
+
+
+    def handle(self, *args, **options):
+        update_accounts()
