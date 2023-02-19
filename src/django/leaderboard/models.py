@@ -8,6 +8,8 @@ def validate_slippi_tag(value):
     if not connect_code_exists(value):
         raise ValidationError('Slippi Tag not found')
 
+
+
 class Account(models.Model):
     slippi_tag = models.CharField(
         'Slippi Tag to register',
@@ -28,22 +30,35 @@ class Account(models.Model):
         'Whether tag is approved',
         default=False
     )
-    last_updated = models.DateTimeField(
-        'Last time the rank information was refreshed',
-        auto_now_add=True,
-        blank=True
+    
+    display_name = models.CharField(
+        max_length=40,
+    )
+    current_update = models.ForeignKey(
+        'Update',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    previous_update = models.ForeignKey(
+        'Update',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
 
     def __str__(self):
         return self.slippi_tag
 
-class AccountUpdate(models.Model):
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    updated_on = models.DateTimeField(
-        'When the update occurred',
-        auto_now_add=True,
-        blank=True
-    )
-    slippi_data = models.JSONField(
-        'Data returned by the slippi api'
-    )
+class Update(models.Model):
+    account = models.ForeignKey(
+        Account,
+        on_delete=models.CASCADE,
+        related_name='+')
+    rating = models.FloatField()
+    wins = models.IntegerField()
+    losses = models.IntegerField()
+    characters = models.JSONField()
+    ranking = models.IntegerField(blank=True)

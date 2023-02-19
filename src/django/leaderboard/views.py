@@ -1,7 +1,11 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.db.models import Max
+from django.db import connection
+
 from .forms import AccountForm
+from .models import Update, Account
 
 # POST/GET account
 def account_request(request):
@@ -19,4 +23,10 @@ def account_request(request):
 
 # GET /
 def index(request):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            SELECT * FROM leaderboard_account
+        ''')
+        print(cursor.fetchall())
+
     return render(request, 'leaderboard/home.html')
