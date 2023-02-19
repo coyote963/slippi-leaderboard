@@ -39,14 +39,20 @@ class Command(BaseCommand):
             all_updates,
             key=lambda x: x['update'].rating,
             reverse=True)):
-            au['update'].ranking = idx + 1
-            au['update'].save()
+            update = au['update']
+            update.ranking = idx + 1
+            update.save()
         
         for au in all_updates:
             account = au['account'] 
             account.previous_update = account.current_update
             account.current_update = au['update']
             account.save()
+
+    def clear_account_updates(account):
+        account.current_update = None
+        account.previous_update = None
+        account.save()
 
 
     def handle(self, *args, **options):
@@ -58,5 +64,6 @@ class Command(BaseCommand):
                     'account': account
                 })
             except Exception as err:
+                clear_account_updates(account)
                 logging.error(print(Exception, err))
         Command.commit_updates(all_updates)

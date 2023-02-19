@@ -23,10 +23,6 @@ def account_request(request):
 
 # GET /
 def index(request):
-    with connection.cursor() as cursor:
-        cursor.execute('''
-            SELECT * FROM leaderboard_account
-        ''')
-        print(cursor.fetchall())
-
+    
     return render(request, 'leaderboard/home.html')
+
