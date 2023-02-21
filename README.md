@@ -1,6 +1,6 @@
 # Slippi Leaderboard
 
-It is a leaderboard for displaying slippi rankings
+It is a leaderboard for displaying slippi rankings. To be added to the leaderboard, users input their slippi tags into the website. There is an automatic job that runs every 12 hours to get updated slippi ratings from approved users. Admins approve slippi accounts via the built-in Django admin panel.
 
 #### Install & Enter VirtualEnv
 
