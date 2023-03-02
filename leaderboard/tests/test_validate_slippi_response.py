@@ -53,7 +53,3 @@ class UpdateAccountValidationTestCase(TestCase):
         result = Command.get_ranked_profile(sample_slippi)
 
         self.assertEqual(result, sample_slippi['getConnectCode']['user']['rankedNetplayProfile'])
-
-    def test_intentionally_fail(self):
-        """TODO REMOVE"""
-        self.assertEqual(1, 2)
