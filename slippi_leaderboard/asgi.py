@@ -11,6 +11,8 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'slippi_leaderboard.settings')
+
+app_env = os.environ.get('APP_ENVIRONMENT', 'local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'settings.{app_env}')
 
 application = get_asgi_application()
