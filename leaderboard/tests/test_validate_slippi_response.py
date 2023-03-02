@@ -54,3 +54,6 @@ class UpdateAccountValidationTestCase(TestCase):
 
         self.assertEqual(result, sample_slippi['getConnectCode']['user']['rankedNetplayProfile'])
 
+    def test_intentionally_fail(self):
+        """TODO REMOVE"""
+        self.assertEqual(1, 2)
