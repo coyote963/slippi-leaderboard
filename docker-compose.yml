@@ -1,0 +1,23 @@
+services:
+  slippi-db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  slippi-web:
+    build: .
+    command: ./docker-entrypoint.sh
+    volumes:
+      - .:/code
+    ports:
+      - "7042:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DJANGO_SETTINGS_MODULE=settings.dev
+    depends_on:
+      - slippi-db

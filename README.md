@@ -5,7 +5,7 @@ It is a leaderboard for displaying slippi rankings. To be added to the leaderboa
 #### Install & Enter VirtualEnv
 
 `poetry install`
-
+`pip install hypercorn`
 `poetry shell`
 
 #### Django commands
@@ -14,7 +14,7 @@ It is a leaderboard for displaying slippi rankings. To be added to the leaderboa
 
 Run development server
 
-`export SECRET_KEY=$(python manage.py generate_password --length 50)`
+`export DJANGO_SECRET_KEY=$(python manage.py generate_password --length 50)`
 
 Generate a secret key
 
