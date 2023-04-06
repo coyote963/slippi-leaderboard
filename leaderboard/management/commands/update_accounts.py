@@ -60,7 +60,7 @@ class Command(BaseCommand):
         account.save()
 
 
-    def run_update_accounts():
+    def update_accounts():
         all_updates = []
         for account in Account.objects.filter(approved=True):
             try:
@@ -75,4 +75,4 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        run_update_accounts()
+        Command.update_accounts()

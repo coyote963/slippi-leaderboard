@@ -55,7 +55,7 @@ class AccountTableViewTestCase(TestCase):
         
         mock_method.side_effect = my_side_effect
 
-        Command.run_update_accounts()
+        Command.update_accounts()
 
         account1 = Account.objects.get(slippi_tag='EXAMPLE1#1')
         account2 = Account.objects.get(slippi_tag='EXAMPLE2#2')
