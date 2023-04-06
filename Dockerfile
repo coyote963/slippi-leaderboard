@@ -25,4 +25,3 @@ RUN pip install hypercorn
 # Creating folders, and files for a project:
 COPY . /code
 
-ENTRYPOINT [ "hypercorn", "slippi_leaderboard.asgi:application" ]
